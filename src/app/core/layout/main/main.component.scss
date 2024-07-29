@@ -1,0 +1,110 @@
+:host {
+  display: flex;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app-layout {
+  height: 100vh;
+}
+
+.menu-sidebar {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+  box-shadow: 2px 0 6px rgba(0,21,41,.35);
+  background: #dbb5c4;
+}
+
+.header-trigger {
+  height: 64px;
+  padding: 20px 24px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all .3s,padding 0s;
+}
+
+.trigger:hover {
+  color: #1890ff;
+}
+
+.sidebar-logo {
+  position: relative;
+  height: 64px;
+  padding-left: 24px;
+  overflow: hidden;
+  line-height: 64px;
+  background: #dbb5c4;
+  transition: all .3s;
+}
+
+.sidebar-logo img {
+  display: inline-block;
+  height: 32px;
+  width: 32px;
+  vertical-align: middle;
+  background: #dbb5c4;
+}
+
+.sidebar-logo h1 {
+  display: inline-block;
+  margin: 0 0 0 20px;
+  color: #0f0b0b;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: Avenir,Helvetica Neue,Arial,Helvetica,sans-serif;
+  vertical-align: middle;
+}
+
+nz-header {
+  padding: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+nz-content {
+  margin: 24px;
+}
+
+.inner-content {
+  padding: 24px;
+  background: #dbb5c4;
+  height: 100%;
+}
+
+/* Estilo para el nz-header */
+.app-header {
+  display: flex;
+  justify-content: space-between; /* Alinea los elementos a los extremos del contenedor */
+  align-items: center; /* Alinea verticalmente los elementos */
+  padding: 0 16px; /* Espaciado interno del encabezado */
+  background: #dbb5c4; /* Color de fondo del encabezado */
+}
+
+/* Estilo para el trigger del menú */
+.header-trigger {
+  display: flex;
+  align-items: center; /* Alinea verticalmente el icono del menú */
+}
+
+/* Botón de cerrar sesión */
+.link {
+  font-size: 14px; /* Tamaño de la fuente */
+  color: rgb(12, 10, 11);
+  border-radius: 5px;
+  padding: 1px 12px; /* Espaciado interno del botón */
+  margin-left: auto; /* Empuja el botón al extremo derecho */
+  box-shadow: 0 2px 4px rgba(243, 159, 211, 0.1); /* Sombra opcional */
+}
+
+/* Estilo para el botón de cerrar sesión en estado activo */
+.link:hover {
+  color: #ffffff; /* Cambia el color del texto al pasar el ratón */
+  background-color: rgb(230, 77, 153); /* Cambia el color de fondo al pasar el ratón */
+}
+
+.nz-menu {
+  background-color: #dbb5c4;
+}
+

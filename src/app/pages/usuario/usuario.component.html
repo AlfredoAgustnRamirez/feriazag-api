@@ -1,0 +1,97 @@
+<h1 class="listusuarios text-center">Listado de usuarios {{userId}}</h1>
+
+<div class="flex justify-content-between p-5">
+  <input class="input" (keyup)="search()" placeholder="Buscar por nombre" [(ngModel)]="value" type="text" />
+  <button class="button" (click)="openModal()" nz-button nzType="primary">Agregar</button>
+</div>
+
+<div class="table-container">
+  <nz-table class="responsive-table" #basicTable [nzData]="listOfData">
+    <thead>
+      <tr>
+        <th class="text-center">ID</th>
+        <th class="text-center">Nombre</th>
+        <th class="text-center">Apellido</th>
+        <th class="text-center">Email</th>
+        <th class="text-center">Usuario</th>
+        <th class="text-center">Perfil</th>
+        <th class="text-center">Activo</th>
+        <th class="text-center">Editar</th>
+        <th class="text-center">Accion</th>
+      </tr>
+    </thead>
+    <tbody class="align-item-center">
+      @for (data of basicTable.data; track $index) {
+      <tr>
+        <td class="text-center">{{ data.id_usuario }}</td>
+        <td class="text-center">{{ data.nombre }}</td>
+        <td class="text-center">{{ data.apellido }}</td>
+        <td class="text-center">{{ data.email }}</td>
+        <td class="text-center">{{ data.usuario }}</td>
+        <td class="text-center">{{ data.descripcion }}</td>
+        <td class="text-center">{{ data.activo }}</td>
+        <td>
+          <button class="nz-button" (click)="edit(data)" nz-button nzType="primary">
+            <span nz-icon nzType="drop"></span>
+            Editar
+          </button>
+        </td>
+        <td>
+          @if(data.activo === 'Si'){
+          <button class="nz-button-desactivar" nz-popconfirm
+            nzPopconfirmTitle="Estas seguro que desea desactivar el usuario?" nzPopconfirmPlacement="bottom"
+            (nzOnConfirm)="desactivarUsuario(data.id_usuario || '')" nz-button nzType="primary">
+            desactivar
+          </button>
+          }@else {
+          <button class="nz-button-activar" nz-popconfirm nzPopconfirmTitle="Estas seguro que desea activar el usuario?"
+            nzPopconfirmPlacement="bottom" (nzOnConfirm)="activarUsuario(data.id_usuario || '')" nz-button
+            nzType="primary">
+            activar
+          </button>
+          }
+
+        </td>
+      </tr>
+      }
+    </tbody>
+  </nz-table>
+</div>
+
+<form [formGroup]="form">
+  <nz-modal [(nzVisible)]="isVisible" [nzTitle]="UserID?.value?'Editar usuario':'Agregar usuario'"
+    (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+    <ng-container *nzModalContent>
+      <input [nzStatus]="(Nombre?.errors && init)?'error' : ''" class="mt-3" nz-input placeholder="Nombre"
+        formControlName="nombre" type="text" />
+      @if(this.form.get('nombre')?.errors && init){
+      <small class="error-text">Debes ingresar un nombre</small>
+      }
+      <input [nzStatus]="(Apellido?.errors && init)?'error' : ''" class="mt-3" nz-input placeholder="Apellido"
+        formControlName="apellido" type="text" />
+      @if(this.form.get('apellido')?.errors && init){
+      <small class="error-text">Debes ingresar un apellido</small>
+      }
+      <input [nzStatus]="(Email?.errors && init)?'error' : ''" class="mt-3" nz-input placeholder="Email"
+        formControlName="email" type="text" />
+      @if(this.form.get('email')?.errors && init){
+      <small class="error-text">Debes ingresar un email</small>
+      }
+      <input [nzStatus]="(Usuario?.errors && init)?'error' : ''" class="mt-3" nz-input placeholder="Usuario"
+        formControlName="usuario" type="text" />
+      @if(this.form.get('usuario')?.errors && init){
+      <small class="error-text">Debes ingresar un usuario</small>
+      }
+      <input [nzStatus]="(Password?.errors && init)?'error' : ''" class="mt-3" nz-input placeholder="Password"
+        formControlName="password" type="text" />
+      @if(this.form.get('password')?.errors && init){
+      <small class="error-text">Debes ingresar un password</small>
+      }
+      <input [nzStatus]="(Activo?.errors && init)?'error' : ''" class="mt-3" nz-input placeholder="Activo"
+        formControlName="activo" type="text" />
+      @if(this.form.get('activo')?.errors && init){
+      <small class="error-text">Debes ingresar activo</small>
+      }
+    </ng-container>
+  </nz-modal>
+</form>

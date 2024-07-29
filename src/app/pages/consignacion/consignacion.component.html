@@ -1,0 +1,114 @@
+<h1 class="listconsignaciones text-center">Listado de consignaciones</h1>
+
+<div class="input-container">
+    <input class="input-codigo m-4" (keyup)="searchPorNombre()"  placeholder="Buscar por nombre de consigncion" [(ngModel)]="valorinput1" type="text" />
+    <input class="input-codigo m-4" (keyup)="searchPorCodCosignacion()"  placeholder="Buscar por codigo consignaicon" [(ngModel)]="valorinput2" type="text" />
+    <button class="button" (click)="openModal()" nz-button nzType="primary">Agregar</button>
+</div>
+<div class="table-container">
+    <nz-table class="responsive-table" #basicTable [nzData]="consignacion">
+        <thead>
+          <tr>
+            <th class="text-center">Codigo</th>
+            <th class="text-center">Nombre</th>
+            <th class="text-center">Apellido</th>
+            <th class="text-center">Instagram</th>
+            <th class="text-center">Domicilio</th>
+            <th class="text-center">Celular</th>
+            <th class="text-center">CbuAlias</th>
+            <th class="text-center">Cbservacion</th>
+            <th class="text-center">Activo</th>
+            <th class="text-center">Ver Productos</th>
+            <th class="text-center">Editar</th>
+            <th class="text-center">Accion</th>
+          </tr>
+        </thead>
+        <tbody>
+            @for (data of basicTable.data; track $index) {
+                <tr>
+                  <td class="text-center">{{ data.cod_consignacion }}</td>
+                  <td class="text-center">{{ data.nombre }}</td>
+                  <td class="text-center">{{ data.apellido }}</td>
+                  <td class="text-center">{{ data.instagram }}</td>
+                  <td class="text-center">{{ data.domicilio }}</td>
+                  <td class="text-center">{{ data.celular }}</td>
+                  <td class="text-center">{{ data.cbuAlias }}</td>
+                  <td class="text-center">{{ data.observacion }}</td>
+                  <td class="text-center">{{ data.activo }}</td>
+                  <td>
+                    <button class="nz-button" [routerLink]="['/productocons', data.id_consignacion]" 
+                     nz-button nzType="primary">
+                        Ver
+                    </button>
+                </td>
+                <td>
+                    <button class="nz-button" (click)="edit(data)" nz-button nzType="primary">Editar</button>
+                </td>
+                <td>
+                    @if(data.activo === 'Si'){
+                        <button class="nz-button-desactivar" nz-popconfirm
+                        nzPopconfirmTitle="Estas seguro que desea desactivar la consignacion?"
+                        nzPopconfirmPlacement="bottom"
+                        (nzOnConfirm)="desactivarConsignacion(data.id_consignacion || '')"
+                         nz-button nzType="primary">
+                            desactivar
+                        </button>
+                      }@else {
+                        <button class="nz-button-activar" nz-popconfirm
+                        nzPopconfirmTitle="Estas seguro que desea activar la consignacion?"
+                        nzPopconfirmPlacement="bottom"
+                        (nzOnConfirm)="activarConsignacion(data.id_consignacion || '')"
+                         nz-button nzType="primary">
+                            activar
+                        </button>
+                      }
+                </td>
+                </tr>
+            }
+        </tbody>
+    </nz-table>
+</div>
+
+<form [formGroup]="form">
+    <nz-modal [(nzVisible)]="isVisible"  [nzTitle]="ConsignacionID?.value?'Editar Consignacion':'Agregar Consignacion'"(nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">    
+        <ng-container *nzModalContent>
+        <input [nzStatus]="(CodConsignacionId?.errors && init)?'error' : ''" nz-input placeholder="Codigo" formControlName="cod_consignacion" type="text" />
+        @if(this.form.get('cod_consignacion')?.errors?.['required'] && init){
+            <small class="error-text">Debes ingresar un codigo de consignaicon</small>
+        }
+        <input [nzStatus]="(Nombre?.errors && init)?'error' : ''" class="mt-2" nz-input placeholder="Nombre" formControlName="nombre" type="text" />
+        @if(this.form.get('nombre')?.errors && init){
+            <small class="error-text">Debes ingresar un nombre</small>
+        }  
+        <input [nzStatus]="(Apellido?.errors && init)?'error' : ''" class="mt-2" nz-input placeholder="Apellido" formControlName="apellido" type="text" />
+        @if(this.form.get('apellido')?.errors && init){
+            <small class="error-text">Debes ingresar un apellido</small>
+        }  
+        <input [nzStatus]="(Instagram?.errors && init)?'error' : ''" class="mt-2" nz-input placeholder="Instagram" formControlName="instagram" type="text" />
+        @if(this.form.get('instagram')?.errors && init){
+            <small class="error-text">Debes ingresar un instagram</small>
+        }  
+        <input [nzStatus]="(Domicilio?.errors && init)?'error' : ''" class="mt-2" nz-input placeholder="Domicilio" formControlName="domicilio" type="text" />
+        @if(this.form.get('domicilio')?.errors && init){
+            <small class="error-text">Debes ingresar un domicilio</small>
+        }  
+        <input [nzStatus]="(Celular?.errors && init)?'error' : ''" class="mt-2" nz-input placeholder="Celular" formControlName="celular" type="text" />
+        @if(this.form.get('celular')?.errors && init){
+            <small class="error-text">Debes ingresar un celular</small>
+        }  
+        <input [nzStatus]="(CbuAlias?.errors && init)?'error' : ''" class="mt-2" nz-input placeholder="Cbu/Alias" formControlName="cbuAlias" type="text" />
+        @if(this.form.get('cbuAlias')?.errors && init){
+            <small class="error-text">Debes ingresar un cbu o alias</small>
+        }  
+        <input [nzStatus]="(Observacion?.errors && init)?'error' : ''" class="mt-2" nz-input placeholder="Observacion" formControlName="observacion" type="text" />
+        @if(this.form.get('observacion')?.errors && init){
+            <small class="error-text">Debes ingresar una observacion</small>
+        }  
+        <input [nzStatus]="(Activo?.errors && init)?'error' : ''" class="mt-2" nz-input placeholder="Activo" formControlName="activo" type="text" />
+        @if(this.form.get('activo')?.errors && init){
+            <small class="error-text">Debes ingresar activo</small>
+        }  
+    </ng-container>
+  </nz-modal>
+</form>
+
