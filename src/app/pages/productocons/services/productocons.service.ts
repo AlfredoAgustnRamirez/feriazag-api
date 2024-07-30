@@ -2,10 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IProductocons } from '../interfaces/productocons.inteface';
-import { ENDPOINTS } from '../../../share/constants/endpoints.constant';
-
-
-
+import { ENDPOINTS } from '../../../share/constants/enpoints.constant';
 
 @Injectable({
   providedIn: 'root'
@@ -16,25 +13,33 @@ export class ProductoconsService {
     private http: HttpClient
   ) { }
 
-  getProductoPorConsignacion(idconsignacion: string): Observable<IProductocons[]>{
-    return this.http.get<IProductocons[]>(`${ENDPOINTS.api}productocons/${idconsignacion}`)
+  
+
+  getProductoPorConsignacion(id_consignacion: string): Observable<IProductocons[]>{
+    return this.http.get<IProductocons[]>(`${ENDPOINTS.api}productocons/${id_consignacion}`)
   }
 
-  saveProducto(idconsignacion: string, payload: IProductocons): Observable<IProductocons>{
-    return this.http.post<IProductocons>(`${ENDPOINTS.api}productocons/crear/${idconsignacion}`, payload)
+  getProductoVendidosPorConsignacion(id_consignacion: string): Observable<IProductocons[]>{
+    return this.http.get<IProductocons[]>(`${ENDPOINTS.api}productocons/vendidos/${id_consignacion}`)
   }
 
-  desactivarProducto(idproducto: string): Observable<IProductocons>{
-    return this.http.delete<IProductocons>(`${ENDPOINTS.api}productocons/desactivar/${idproducto}`)
+  getTodosProductoPorConsignacion(id_consignacion: string): Observable<IProductocons[]>{
+    return this.http.get<IProductocons[]>(`${ENDPOINTS.api}productocons/todos/${id_consignacion}`)
   }
 
-  activarProducto(idproducto: string): Observable<IProductocons>{
-    return this.http.delete<IProductocons>(`${ENDPOINTS.api}productocons/activar/${idproducto}`)
+  saveProducto(id_consignacion: string, payload: IProductocons): Observable<IProductocons>{
+    return this.http.post<IProductocons>(`${ENDPOINTS.api}productocons/${id_consignacion}`, payload)
+  }
+
+  desactivarProducto(id_producto: string): Observable<IProductocons>{
+    return this.http.delete<IProductocons>(`${ENDPOINTS.api}productocons/desactivar/${id_producto}`)
+  }
+
+  activarProducto(id_producto: string): Observable<IProductocons>{
+    return this.http.delete<IProductocons>(`${ENDPOINTS.api}productocons/activar/${id_producto}`)
   }
 
   updateProducto(payload: IProductocons): Observable<IProductocons>{
-    return this.http.put<IProductocons>(`${ENDPOINTS.api}productocons/update/${payload.idproducto}`, payload)
+    return this.http.put<IProductocons>(`${ENDPOINTS.api}productocons/update/${payload.id_producto}`, payload)
   }
-
-
 }

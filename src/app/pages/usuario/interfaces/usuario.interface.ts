@@ -7,4 +7,6 @@ export interface IUsuario{
     password?: string
     activo: string
     descripcion?: string
+    listId?: string
+    id_perfil?: string
 }

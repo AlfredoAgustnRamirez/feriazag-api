@@ -7,13 +7,11 @@ import { IProducto } from './interfaces/producto.interface';
 import { ProductoService } from './services/producto.service';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzMessageService, NzMessageModule } from 'ng-zorro-antd/message';
-import { ActivatedRoute, Router, RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
-import { HttpClient } from '@angular/common/http';
-
 
 @Component({
-  selector: 'app-contacts',
+  selector: 'app-producto',
   standalone: true,
   imports: [
     NzInputModule,
@@ -30,34 +28,49 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProductoComponent implements OnInit{
   value: string = ''
-  listOfData: IProducto[] = []
-  listOfDataTmp: IProducto[] = []
+  productos: IProducto[] = []
+  productosTmp: IProducto[] = []
+  productosVendidos: IProducto[] = []
+  productosNoVendidos: IProducto[] = []
+  productosVendidosTmp: IProducto[] = []
+  productosNoVendidosTmp: IProducto[] = []
   form!: IProducto
   isVisible: boolean = false
-  idproducto: string = ''
+  id_producto: string = ''
   descripcion: string = ''
-  idcategoria: string = ''
+  id_categoria: string = ''
   productoid: string = ''
-  codconsignacion: string = ''
-  idconsignacion: string = ''
-  codigo: string = ''
+  cod_consignacion: string = ''
+  id_consignacion: string = ''
   categoria: string = ''
   talle: string = ''
   precio: string = ''
   activo: string = ''
   consignacionId: string = ''
+  cod_producto: string = ''
+  valorinput1: string = ''
+  valorinput2: string = ''
+  opcionSeleccionada: string = '';
 
   constructor(
     private productoServices: ProductoService,
     private message: NzMessageService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private http: HttpClient
-  ){}
+  ){
+    // Inicializa ventaTmp con tus datos originales (ejemplo)
+    this.productosTmp = [
+      { descripcion: '', cod_producto: ''},
+      // Otros productos...
+    ];
+    // Inicializa venta con los datos originales al inicio
+    this.productos = this.productosTmp;
+    // Obtener el ID del usuario al inicializar el componente
+  }
 
   ngOnInit(){
-      this.getProducto()
-   }
+    this.obtenerProductosVendidos();
+    this.obtenerProductos();
+    this.obtenerTodosProductos();
+  }
 
   openModal(){
     this.isVisible = true
@@ -71,37 +84,67 @@ export class ProductoComponent implements OnInit{
     this.isVisible = false
   }
 
-  getProducto(){
-      this.productoServices.getProducto().subscribe((producto: IProducto[])=>{
-      this.listOfData = producto
-      this.listOfDataTmp = producto
-   })
+  obtenerProductosVendidos() {
+    this.productoServices.getProductoVendidos().subscribe(productos => {
+      this.productosNoVendidos = productos;
+      this.productosNoVendidosTmp = productos;
+    });
+  }
+
+  obtenerProductos(){
+    this.productoServices.getProducto().subscribe(productos => {
+      this.productosVendidos = productos;
+      this.productosVendidosTmp = productos;      
+    });
+  }
+
+  obtenerTodosProductos(){
+    this.productoServices.getTodosProductos().subscribe(productos => {
+      this.productos = productos;
+      this.productosTmp = productos;      
+    });
+  }
+
+   // Método para manejar el cambio en el select
+   onSelectChange(event: any) {
+    this.opcionSeleccionada = event.target.value;
   }
 
   reset(){
-    this.codconsignacion = ''
+    this.cod_consignacion = ''
     this.talle = ''
     this.precio = ''
     this.activo = ''
  }
  
-
-  desactivarProducto(idproducto: string){
-    this.productoServices.desactivarProducto(idproducto).subscribe(_=>{
+  desactivarProducto(id_producto: string){
+    this.productoServices.desactivarProducto(id_producto).subscribe(_=>{
       this.message.success('Producto desactivado')
-      this.getProducto()
+      this.obtenerProductos()
+      this.obtenerProductosVendidos()
+      this.obtenerTodosProductos()
     })
   }
 
-  activarProducto(idproducto: string){
-    this.productoServices.activarProducto(idproducto).subscribe(_=>{
+  activarProducto(id_producto: string){
+    this.productoServices.activarProducto(id_producto).subscribe(_=>{
       this.message.success('Producto activado')
-      this.getProducto()
+      this.obtenerProductosVendidos()
+      this.obtenerProductos()
+      this.obtenerTodosProductos()
     })
   }
 
-  search(){
-    this.listOfData = this.listOfDataTmp.filter((producto: IProducto)=> producto.descripcion.toLocaleLowerCase().indexOf(this.value.toLocaleLowerCase()) > -1) 
+  searchPorDescripcion(){
+      this.productosNoVendidosTmp = this.productosNoVendidos.filter((producto: IProducto)=> producto.descripcion.toLocaleLowerCase().indexOf(this.valorinput1.toLocaleLowerCase()) > - 1) 
+      this.productosVendidosTmp = this.productosVendidos.filter((producto: IProducto)=> producto.descripcion.toLocaleLowerCase().indexOf(this.valorinput1.toLocaleLowerCase()) > - 1) 
+      this.productos = this.productosTmp.filter((producto: IProducto)=> producto.descripcion.toLocaleLowerCase().indexOf(this.valorinput1.toLocaleLowerCase()) > - 1) 
+    }
+  
+  searchPorCodigo(){
+    this.productosNoVendidosTmp = this.productosNoVendidos.filter((producto: IProducto)=> producto.cod_producto.toLocaleLowerCase().indexOf(this.valorinput2.toLocaleLowerCase()) > - 1) 
+    this.productosVendidosTmp = this.productosVendidos.filter((producto: IProducto)=> producto.cod_producto.toLocaleLowerCase().indexOf(this.valorinput2.toLocaleLowerCase()) > - 1) 
+    this.productos = this.productosTmp.filter((producto: IProducto)=> producto.cod_producto.toLocaleLowerCase().indexOf(this.valorinput2.toLocaleLowerCase()) > - 1) 
   }
 
 }

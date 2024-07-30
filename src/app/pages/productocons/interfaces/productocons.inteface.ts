@@ -1,13 +1,13 @@
 export interface IProductocons{
-    idproducto?: string
-    idconsignacion?: string
-    codconsignacion?: string
-    codproducto?: string
-    idcategoria?: string
+    id_producto?: string
+    id_consignacion?: string
+    cod_consignacion?: string
+    cod_producto: string
+    id_categoria?: string
     categoria?: string
     descripcion: string
-    talle: string
-    nombre?: string
-    precio: string
-    activo: string
+    talle?: string
+    precio?: string
+    activo?: string
+    listCategoriaId?: string
 }

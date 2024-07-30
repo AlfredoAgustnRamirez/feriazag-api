@@ -4,10 +4,11 @@ export interface Session{
 }
 
 export interface User{
-    token: User;
-    id: string
+    id_usuario: string
     password: string
     email: string
+    userId: string
+    nombreUsr: string
 }
 
 

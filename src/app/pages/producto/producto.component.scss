@@ -1,41 +1,129 @@
-.imput{
-    width: 60%;
+.input {
+  padding: 12px;
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid #d682b1;
+  background-color: #e2aed9;
 }
 
-.listproductos{
+.input-codigo {
+  flex: 1; /* Los inputs ocupan el mismo espacio */
+  padding: 12px;
+  height: 40px;
+  width: 100%;
+  max-width: 250px;
+  border: 1px solid #d682b1;
+  margin-left: auto;
+  color: #b15c86;
+  background-color: #e2aed9;
+}
+
+.input-container {
+  display: flex;
+  gap: 10px;
+}
+
+.select {
+  background-color: #e2aed9;
+  height: 37px;
+  margin-top: 25px;
+}
+
+.listproductos {
   color: rgb(197, 107, 152);
 }
 
-[nz-button] {
-    margin-right: 8px;
-    margin-bottom: 12px;
-    background-color: rgb(201, 167, 196);
-  }
+.nz-button-activar {
+  left: 50%;
+  bottom: 1px; /* Ajusta la distancia del botón desde abajo según sea necesario */
+  transform: translateX(-50%);
+  background-color: #1bc941;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-  nz-table{
-    padding: 5px;
-  }
+.nz-button-desactivar {
+  left: 50%;
+  bottom: 1px; /* Ajusta la distancia del botón desde abajo según sea necesario */
+  transform: translateX(-50%);
+  background-color: #9e1212;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-  .table-container {
-    overflow-x: auto; /* Habilita el desplazamiento horizontal */
-    max-width: 100%; /* Limita el ancho máximo al contenedor */
-  }
-  
+.nz-button:hover {
+  background-color: #cf77a0;
+}
+
+.table-container {
+  width: 100%;
+  border-collapse: collapse; /* Combina los bordes de las celdas */
+  overflow-x: auto; /* Habilita el desplazamiento horizontal */
+  max-width: 100%; /* Limita el ancho máximo al contenedor */
+  position: relative;
+}
+
+.table-container th,
+.table-container td {
+  border: 1px solid #ddd; /* Añade bordes a las celdas */
+  padding: 5px;
+  background-color: rgb(233, 204, 220);
+}
+
+.table-container tr {
+  height: 2px; /* Altura de las filas */
+}
+
+.responsive-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.responsive-table th, .responsive-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+@media screen and (max-width: 600px) {
   .responsive-table {
-    width: 100%;
-    border-collapse: collapse; /* Combina los bordes de las celdas */
+    overflow-x: auto;
+    display: block;
   }
 
-  .responsive-table th, .responsive-table td {
-    border: 1px solid #ddd; /* Añade bordes a las celdas */
-    padding: 10px;
-    background-color: rgb(233, 204, 220);
+  .responsive-table thead, .responsive-table tbody, .responsive-table th, .responsive-table td, .responsive-table tr {
+    display: block;
   }
-  
-  /* Media query para ajustar el tamaño de las celdas en dispositivos pequeños */
-  @media (max-width: 600px) {
-    .responsive-table th, .responsive-table td {
-      padding: 10px;
-      font-size: 10px;
-    }
+
+  .responsive-table thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
   }
+
+  .responsive-table tr {
+    border: 1px solid #ddd;
+  }
+
+  .responsive-table td {
+    border: none;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+    padding-left: 50%;
+    text-align: left;
+  }
+
+  .responsive-table td:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    content: attr(data-label);
+  }
+}

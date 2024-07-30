@@ -9,13 +9,23 @@ import { ENDPOINTS } from '../../../share/constants/enpoints.constant';
   providedIn: 'root'
 })
 export class AuthService {
+  private userId: string;
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) { this.userId = '';}
 
   login(payload: UserPayload): Observable<User>{
     return this.http.post<User>(`${ENDPOINTS.api}user/login`, payload)
   }
+
+  getUserId(): string {
+    return localStorage.getItem('userId') || '';
+  }
+
+  getUserNombre(): string {
+    return localStorage.getItem('nombreUsr') || '';
+  }
+
 
 }
