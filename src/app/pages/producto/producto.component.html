@@ -40,7 +40,7 @@
                     nzPopconfirmPlacement="bottom"
                     (nzOnConfirm)="desactivarProducto(data.id_producto || '')"
                      nz-button nzType="primary">
-                        desactivar
+                     <i nz-icon [nzType]="'close'"></i>
                     </button>
                   }@else {
                     <button class="nz-button-activar" nz-popconfirm
@@ -48,7 +48,7 @@
                     nzPopconfirmPlacement="bottom"
                     (nzOnConfirm)="activarProducto(data.id_producto || '')"
                      nz-button nzType="primary">
-                        activar
+                     <i nz-icon [nzType]="'check'"></i>
                     </button>
                   }
                 </td>
@@ -86,7 +86,7 @@
                     nzPopconfirmPlacement="bottom"
                     (nzOnConfirm)="desactivarProducto(data.id_producto || '')"
                      nz-button nzType="primary">
-                        desactivar
+                     <i nz-icon [nzType]="'close'"></i>
                     </button>
                   }@else {
                     <button class="nz-button-activar" nz-popconfirm
@@ -94,7 +94,7 @@
                     nzPopconfirmPlacement="bottom"
                     (nzOnConfirm)="activarProducto(data.id_producto || '')"
                      nz-button nzType="primary">
-                        activar
+                     <i nz-icon [nzType]="'check'"></i>
                     </button>
                   }
                 </td>
@@ -133,7 +133,7 @@
                       nzPopconfirmPlacement="bottom"
                       (nzOnConfirm)="desactivarProducto(data.id_producto || '')"
                        nz-button nzType="primary">
-                          desactivar
+                       <i nz-icon [nzType]="'close'"></i>
                       </button>
                     }@else {
                       <button class="nz-button-activar" nz-popconfirm
@@ -141,7 +141,7 @@
                       nzPopconfirmPlacement="bottom"
                       (nzOnConfirm)="activarProducto(data.id_producto || '')"
                        nz-button nzType="primary">
-                          activar
+                       <i nz-icon [nzType]="'check'"></i>
                       </button>
                     }
                   </td>

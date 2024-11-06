@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { VentaService } from './services/venta.service';
-import { IVenta } from './interfaces/venta.interface';
+import { VentaNormalService } from './services/venta-normal.service';
+import { IVentaNormal } from './interfaces/venta-normal.interface';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { NzIconModule } from 'ng-zorro-antd/icon';
 import {
   FormBuilder,
   FormControl,
@@ -34,7 +33,6 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     ReactiveFormsModule,
     NzButtonModule,
-    NzIconModule,
     NzTableModule,
     NzModalModule,
     RouterModule,
@@ -44,16 +42,16 @@ import { CommonModule } from '@angular/common';
     RouterModule,
     RouterOutlet,
   ],
-  templateUrl: './venta.component.html',
-  styleUrl: './venta.component.scss',
+  templateUrl: './venta-normal.component.html',
+  styleUrl: './venta-normal.component.scss',
 })
-export class VentaComponent implements OnInit, OnDestroy {
-  venta: IVenta[] = [];
-  ventaTmp: IVenta[] = [];
-  productosAgregados: IVenta[] = [];
+export class VentaNormalComponent implements OnInit, OnDestroy {
+  venta: IVentaNormal[] = [];
+  ventaTmp: IVentaNormal[] = [];
+  productosAgregados: IVentaNormal[] = [];
   productosAgregadoss: string[] = [];
   productosEliminados: string[] = [];
-  productosDisponibles: IVenta[] = [];
+  productosDisponibles: IVentaNormal[] = [];
   listUsuario: IUsuario[] = [];
   form!: FormGroup;
   isVisible: boolean = false;
@@ -76,7 +74,7 @@ export class VentaComponent implements OnInit, OnDestroy {
   private ventaSubscription: Subscription | undefined;
 
   constructor(
-    private VentaService: VentaService,
+    private VentaNormalService: VentaNormalService,
     private AuthService: AuthService,
     private productoServices: ProductoService,
     private message: NzMessageService,
@@ -116,13 +114,13 @@ export class VentaComponent implements OnInit, OnDestroy {
   }
 
   getProducto() {
-    this.VentaService.getProducto().subscribe((producto: IVenta[]) => {
+    this.VentaNormalService.getProducto().subscribe((producto: IVentaNormal[]) => {
       this.venta = producto;
       this.ventaTmp = producto;
     });
   }
 
-  agregarProducto(producto: IVenta) {
+  agregarProducto(producto: IVentaNormal) {
     this.productosAgregados.push(producto);
     // Agregar el código del producto a la lista de productos agregados
     this.productosAgregadoss.push(producto.cod_producto);
@@ -164,7 +162,7 @@ export class VentaComponent implements OnInit, OnDestroy {
   }
 
   searchPorDescripcion() {
-    this.venta = this.ventaTmp.filter((producto: IVenta) =>
+    this.venta = this.ventaTmp.filter((producto: IVentaNormal) =>
       producto.descripcion
         .toLocaleLowerCase()
         .includes(this.valorinput1.toLocaleLowerCase())
@@ -173,7 +171,7 @@ export class VentaComponent implements OnInit, OnDestroy {
 
   searchPorCodigo() {
     this.venta = this.ventaTmp.filter(
-      (producto: IVenta) =>
+      (producto: IVentaNormal) =>
         producto.cod_producto
           .toLocaleLowerCase()
           .includes(this.valorinput2.toLocaleLowerCase()) &&
@@ -206,48 +204,6 @@ export class VentaComponent implements OnInit, OnDestroy {
     }
   }
 
-  registrarVenta() {
-    this.actualizarTotalVenta();
-  
-    // Verifica que totalVenta esté definido y en el formato esperado
-    let totalString: string = this.totalVenta || '0';
-    let total: number = parseFloat(totalString.replace('$', '').replace(',', ''));
-  
-    // Verifica que total sea un número válido
-    if (isNaN(total)) {
-      this.message.error('El total de la venta no es válido.');
-      return;
-    }
-  
-    // Crear el array de detalles
-    const detalles = this.productosAgregados.map((producto) => ({
-      id_producto: producto.id_producto || '',
-      precio: producto.precio || 0,
-    }));
-  
-    // Registrar la venta a través del servicio
-    this.VentaService.registrarVenta(
-      this.userId,
-      total,
-      this.fecha,
-      detalles
-    ).subscribe(
-      (_) => {
-        this.message.success('Venta registrada correctamente.');
-        // Cambiar el estado de activo después de realizar la venta
-        this.productosAgregados.forEach((producto) => {
-          const nuevoEstado = producto.nuevoEstado || '';
-          this.updateActivo(producto.id_producto || '', nuevoEstado);
-        });
-        this.resetValores();
-        this.getProducto();
-        this.actualizarTotalVenta();
-      },
-      (error) => {
-        this.message.error('Error al registrar la venta: ' + (error?.message || ''));
-      }
-    );
-  }
   
   registrarVenta2() {
     this.actualizarTotalVenta();
@@ -265,11 +221,12 @@ export class VentaComponent implements OnInit, OnDestroy {
     // Crear el array de detalles
     const detalles = this.productosAgregados.map((producto) => ({
         cod_producto: producto.cod_producto || '', // Cambia id_producto a cod_producto si es necesario
+        descripcion: producto.descripcion || '',
         precio: producto.precio || 0
     }));
 
     // Registrar la venta a través del servicio
-    this.VentaService.registerVenta2(
+    this.VentaNormalService.registrarVenta2(
         this.userId,
         total,
         this.fecha,

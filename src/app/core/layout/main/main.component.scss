@@ -67,6 +67,10 @@ nz-content {
   margin: 24px;
 }
 
+.nz-menu{
+  background-color: #dbb5c4;
+}
+
 .inner-content {
   padding: 24px;
   background: #dbb5c4;
@@ -100,11 +104,16 @@ nz-content {
 
 /* Estilo para el botón de cerrar sesión en estado activo */
 .link:hover {
-  color: #ffffff; /* Cambia el color del texto al pasar el ratón */
+  color: #e0a5bc; /* Cambia el color del texto al pasar el ratón */
   background-color: rgb(230, 77, 153); /* Cambia el color de fondo al pasar el ratón */
 }
 
-.nz-menu {
-  background-color: #dbb5c4;
+.menu-title {
+  display: flex;
+  align-items: center; /* Alinea verticalmente el ícono y el texto */
+}
+
+.menu-title i {
+  margin-right: 8px; /* Ajusta el espacio entre el ícono y el texto según sea necesario */
 }
 

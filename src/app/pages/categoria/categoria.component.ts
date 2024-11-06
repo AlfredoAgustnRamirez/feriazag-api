@@ -3,6 +3,7 @@ import { CategoriaService } from './services/categoria.service';
 import { ICategoria } from './interfaces/categoria.interface';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzModalModule } from 'ng-zorro-antd/modal';
@@ -20,6 +21,7 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     ReactiveFormsModule,
     NzButtonModule,
+    NzIconModule,
     NzTableModule,
     NzModalModule,
     RouterModule,

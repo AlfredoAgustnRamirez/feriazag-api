@@ -2,7 +2,9 @@
 
 <div class="flex justify-content-between p-5">
   <input class="input" (keyup)="search()" placeholder="Buscar por nombre" [(ngModel)]="value" type="text" />
-  <button class="button" (click)="openModal()" nz-button nzType="primary">Agregar</button>
+  <button class="button" (click)="openModal()" nz-button nzType="primary">
+    <i nz-icon [nzType]="'plus'"></i>
+  </button>
 </div>
 
 <div class="table-container">
@@ -33,7 +35,7 @@
         <td>
           <button class="nz-button" (click)="edit(data)" nz-button nzType="primary">
             <span nz-icon nzType="drop"></span>
-            Editar
+            <i nz-icon [nzType]="'edit'"></i>
           </button>
         </td>
         <td>
@@ -41,13 +43,13 @@
           <button class="nz-button-desactivar" nz-popconfirm
             nzPopconfirmTitle="Estas seguro que desea desactivar el usuario?" nzPopconfirmPlacement="bottom"
             (nzOnConfirm)="desactivarUsuario(data.id_usuario || '')" nz-button nzType="primary">
-            desactivar
+            <i nz-icon [nzType]="'close'"></i>
           </button>
           }@else {
           <button class="nz-button-activar" nz-popconfirm nzPopconfirmTitle="Estas seguro que desea activar el usuario?"
             nzPopconfirmPlacement="bottom" (nzOnConfirm)="activarUsuario(data.id_usuario || '')" nz-button
             nzType="primary">
-            activar
+            <i nz-icon [nzType]="'check'"></i>
           </button>
           }
 

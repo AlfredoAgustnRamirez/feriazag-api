@@ -7,6 +7,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzTableModule } from 'ng-zorro-antd/table';
@@ -24,6 +25,7 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     NzInputModule,
+    NzIconModule,
     FormsModule,
     ReactiveFormsModule,
     NzButtonModule,
@@ -130,33 +132,34 @@ export class ConsignacionComponent implements OnInit {
     this.isVisible = false;
   }
 
-  handleOk(){
-    this.init = true
-    if(this.form.valid){
-        if(this.consignacionId){
-          this.update()
-       }else{
-          this.createConsignacion()
+  handleOk() {
+    this.init = true;
+    if (this.form.valid) {
+      if (this.consignacionId) {
+        this.update();
+      } else {
+        this.createConsignacion();
+      }
+      this.isVisible = false;
     }
-    this.isVisible = false
-    }
-   
   }
 
   initForm() {
     this.form = this.fb.group({
       id_consignacion: new FormControl(''),
-      cod_consignacion: new FormControl('', [Validators.required,
+      cod_consignacion: new FormControl('', [
+        Validators.required,
         Validators.minLength(2),
-        Validators.maxLength(2)
-        ]),
+        Validators.maxLength(2),
+      ]),
       nombre: new FormControl('', [Validators.required]),
       apellido: new FormControl('', [Validators.required]),
       instagram: new FormControl('', [Validators.required]),
       domicilio: new FormControl('', [Validators.required]),
-      celular: new FormControl('', [Validators.required,
-      Validators.minLength(11),
-      Validators.maxLength(11)
+      celular: new FormControl('', [
+        Validators.required,
+        Validators.minLength(11),
+        Validators.maxLength(11),
       ]),
       cbuAlias: new FormControl('', [Validators.required]),
       observacion: new FormControl('', [Validators.required]),
@@ -189,9 +192,10 @@ export class ConsignacionComponent implements OnInit {
 
   update() {
     this.consignacionServices
-      .updateConsignacion(this.form.value).subscribe(_ => {
+      .updateConsignacion(this.form.value)
+      .subscribe((_) => {
         this.message.success('Consignacion actualizado');
-        this.getConsignacion()
+        this.getConsignacion();
         this.initForm();
       });
   }
@@ -202,44 +206,43 @@ export class ConsignacionComponent implements OnInit {
     this.isVisible = true;
   }
 
-  get ConsignacionID(){
-    return this.form.get('id_consignacion')
+  get ConsignacionID() {
+    return this.form.get('id_consignacion');
   }
 
-  get CodConsignacionId(){
-    return this.form.get('cod_consignacion')
+  get CodConsignacionId() {
+    return this.form.get('cod_consignacion');
   }
 
-  get Nombre(){
-    return this.form.get('nombre')
+  get Nombre() {
+    return this.form.get('nombre');
   }
 
-  get Apellido(){
-    return this.form.get('apellido')
+  get Apellido() {
+    return this.form.get('apellido');
   }
 
-  get Instagram(){
-    return this.form.get('instagram')
+  get Instagram() {
+    return this.form.get('instagram');
   }
 
-  get Domicilio(){
-    return this.form.get('domicilio')
+  get Domicilio() {
+    return this.form.get('domicilio');
   }
 
-  get Celular(){
-    return this.form.get('celular')
+  get Celular() {
+    return this.form.get('celular');
   }
 
-  get CbuAlias(){
-    return this.form.get('cbuAlias')
+  get CbuAlias() {
+    return this.form.get('cbuAlias');
   }
 
-  get Observacion(){
-    return this.form.get('observacion')
+  get Observacion() {
+    return this.form.get('observacion');
   }
 
-  get Activo(){
-    return this.form.get('activo')
+  get Activo() {
+    return this.form.get('activo');
   }
-
 }

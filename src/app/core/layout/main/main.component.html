@@ -12,7 +12,7 @@
       </a>
     </div>
     <ul nz-menu class="nz-menu" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzOpen nzTitle="Consignacion" nzIcon="Shop">
+      <li nz-submenu nzOpen nzTitle="Consignacion" nzIcon="shopping">
         <ul>
           <li nz-menu-item nzMatchRouter>
             <a href="/consignacion">Listar</a>
@@ -40,10 +40,15 @@
           </li>
         </ul>
       </li>
-      <li nz-submenu nzOpen nzTitle="Venta" nzIcon="form">
+      <li nz-submenu nzOpen nzTitle="Venta" nzIcon="dollar">
         <ul>
           <li class="submenu" nz-menu-item nzMatchRouter>
-            <a href="./venta">Vender</a>
+            <a href="./venta">Venta</a>
+          </li>
+        </ul>
+        <ul>
+          <li class="submenu" nz-menu-item nzMatchRouter>
+            <a href="./venta-normal">Venta normal</a>
           </li>
         </ul>
         <ul>

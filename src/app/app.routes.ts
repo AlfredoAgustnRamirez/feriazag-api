@@ -16,6 +16,7 @@ export const routes: Routes = [
       { path: 'usuario', loadChildren: () => import('./pages/usuario/usuario.routes').then(m => m.USUARIO_ROUTES) },
       { path: 'categoria', loadChildren: () => import('./pages/categoria/categoria.routes').then(m => m.CATEGORIA_ROUTES) },
       { path: 'venta', loadChildren: () => import('./pages/venta/venta.routes').then(m => m.VENTA_ROUTES) },
+      { path: 'venta-normal', loadChildren: () => import('./pages/venta-normal/venta-normal.routes').then(m => m.VENTANORMAL_ROUTES) },
       { path: 'ventas-detalles', loadChildren: () => import('./pages/ventas-detalles/ventas-detalles.routes').then(m => m.VENTASDETALLES_ROUTES) },
     ],
     canActivate: [authGuard]

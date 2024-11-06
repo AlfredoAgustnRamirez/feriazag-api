@@ -13,7 +13,7 @@ interface DashboardData {
   styleUrls: ['./welcome.component.scss']
 })
 export class WelcomeComponent implements OnInit {
-
+  currentDateTime: string = '';
   data: DashboardData = {
     clientes: 100,
     ventas: 500,
@@ -22,6 +22,13 @@ export class WelcomeComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.updateDateTime();
+  }
+
+  updateDateTime() {
+    const now = new Date();
+    this.currentDateTime = now.toLocaleString(); // O usa un formato más específico
+  }
 
 }

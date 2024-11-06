@@ -3,7 +3,9 @@
 <div class="input-container">
     <input class="input-codigo m-4" (keyup)="searchPorNombre()"  placeholder="Buscar por nombre de consigncion" [(ngModel)]="valorinput1" type="text" />
     <input class="input-codigo m-4" (keyup)="searchPorCodCosignacion()"  placeholder="Buscar por codigo consignaicon" [(ngModel)]="valorinput2" type="text" />
-    <button class="button" (click)="openModal()" nz-button nzType="primary">Agregar</button>
+    <button class="button" (click)="openModal()" nz-button nzType="primary">
+        <i nz-icon [nzType]="'plus'"></i>
+    </button>
 </div>
 <div class="table-container">
     <nz-table class="responsive-table" #basicTable [nzData]="consignacion">
@@ -38,11 +40,13 @@
                   <td>
                     <button class="nz-button" [routerLink]="['/productocons', data.id_consignacion]" 
                      nz-button nzType="primary">
-                        Ver
+                     <i nz-icon [nzType]="'eye'"></i>
                     </button>
                 </td>
                 <td>
-                    <button class="nz-button" (click)="edit(data)" nz-button nzType="primary">Editar</button>
+                    <button class="nz-button" (click)="edit(data)" nz-button nzType="primary">
+                        <i nz-icon [nzType]="'edit'"></i>
+                    </button>
                 </td>
                 <td>
                     @if(data.activo === 'Si'){
@@ -51,7 +55,7 @@
                         nzPopconfirmPlacement="bottom"
                         (nzOnConfirm)="desactivarConsignacion(data.id_consignacion || '')"
                          nz-button nzType="primary">
-                            desactivar
+                         <i nz-icon [nzType]="'close'"></i>
                         </button>
                       }@else {
                         <button class="nz-button-activar" nz-popconfirm
@@ -59,7 +63,7 @@
                         nzPopconfirmPlacement="bottom"
                         (nzOnConfirm)="activarConsignacion(data.id_consignacion || '')"
                          nz-button nzType="primary">
-                            activar
+                         <i nz-icon [nzType]="'check'"></i>
                         </button>
                       }
                 </td>

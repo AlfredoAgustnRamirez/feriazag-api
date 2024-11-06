@@ -11,6 +11,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzModalModule } from 'ng-zorro-antd/modal';
@@ -25,6 +26,7 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     NzInputModule,
+    NzIconModule,
     FormsModule,
     ReactiveFormsModule,
     NzButtonModule,

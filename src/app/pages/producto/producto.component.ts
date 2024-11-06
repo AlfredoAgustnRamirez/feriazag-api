@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { FormsModule } from '@angular/forms';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { IProducto } from './interfaces/producto.interface';
 import { ProductoService } from './services/producto.service';
@@ -17,6 +18,7 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
     NzInputModule,
     FormsModule,
     NzButtonModule,
+    NzIconModule,
     NzTableModule,
     NzModalModule,
     RouterModule,

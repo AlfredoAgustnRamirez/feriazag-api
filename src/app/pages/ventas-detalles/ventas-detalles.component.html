@@ -18,16 +18,16 @@
           <th class="text-center">IdCabecera</th>
           <th class="text-center">Fecha</th>
           <th class="text-center">CodProducto</th>
-          <th class="text-center">Descripcion</th>
+          <th class="text-center">Articulo</th>
           <th class="text-center">Precio</th>
         </tr>
       </thead>
       <tbody class="align-item-center">
           @for (data of ventasDetalleDelDia.data; track $index) {
               <tr>
-                <td class="text-center">{{ data.idcabecera }}</td>                
+                <td class="text-center">{{ data.id_cabecera }}</td>                
                 <td class="text-center">{{ data.fecha }}</td>
-                <td class="text-center">{{ data.codproducto}}</td>
+                <td class="text-center">{{ data.cod_producto}}</td>
                 <td class="text-center">{{ data.descripcion}}</td>
                 <td class="text-center">{{'$'}}{{ data.precio }}</td>
               }
@@ -40,17 +40,15 @@
             <th class="text-center">IdCabecera</th>
             <th class="text-center">Fecha</th>
             <th class="text-center">CodProducto</th>
-            <th class="text-center">Descripcion</th>
             <th class="text-center">Precio</th>
           </tr>
         </thead>
         <tbody class="align-item-center">
             @for (data of ventasDetalleSemana.data; track $index) {
                 <tr>
-                  <td class="text-center">{{ data.idcabecera }}</td>                
+                  <td class="text-center">{{ data.id_cabecera }}</td>                
                   <td class="text-center">{{ data.fecha }}</td>
-                  <td class="text-center">{{ data.codproducto}}</td>
-                  <td class="text-center">{{ data.descripcion}}</td>
+                  <td class="text-center">{{ data.cod_producto}}</td>
                   <td class="text-center">{{'$'}}{{ data.precio }}</td>
                 }
         </tbody>
@@ -62,17 +60,15 @@
             <th class="text-center">IdCabecera</th>
             <th class="text-center">Fecha</th>
             <th class="text-center">CodProducto</th>
-            <th class="text-center">Descripcion</th>
             <th class="text-center">Precio</th>
           </tr>
         </thead>
         <tbody class="align-item-center">
             @for (data of ventasDetalleMes.data; track $index) {
                 <tr>
-                  <td class="text-center">{{ data.idcabecera }}</td>                
+                  <td class="text-center">{{ data.id_cabecera }}</td>                
                   <td class="text-center">{{ data.fecha }}</td>
-                  <td class="text-center">{{ data.codproducto}}</td>
-                  <td class="text-center">{{ data.descripcion}}</td>
+                  <td class="text-center">{{ data.cod_producto}}</td>
                   <td class="text-center">{{'$'}}{{ data.precio }}</td>
                 }
         </tbody>
@@ -84,16 +80,16 @@
             <th class="text-center">IdCabecera</th>
             <th class="text-center">Fecha</th>
             <th class="text-center">CodProducto</th>
-            <th class="text-center">Descripcion</th>
+            <th class="text-center">Articulo</th>
             <th class="text-center">Precio</th>
           </tr>
         </thead>
         <tbody class="align-item-center">
             @for (data of ventasDetalle.data; track $index) {
                 <tr>
-                  <td class="text-center">{{ data.idcabecera }}</td>                
+                  <td class="text-center">{{ data.id_cabecera }}</td>                
                   <td class="text-center">{{ data.fecha }}</td>
-                  <td class="text-center">{{ data.codproducto}}</td>
+                  <td class="text-center">{{ data.cod_producto}}</td>
                   <td class="text-center">{{ data.descripcion}}</td>
                   <td class="text-center">{{'$'}}{{ data.precio }}</td>
                 }
