@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { IProductocons } from './interfaces/productocons.inteface';
 import { ProductoconsService } from './services/productocons.service';
@@ -27,6 +28,7 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     NzInputModule,
+    NzIconModule,
     FormsModule,
     ReactiveFormsModule,
     NzButtonModule,
